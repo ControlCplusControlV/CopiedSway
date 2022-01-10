@@ -15,17 +15,17 @@ pub trait IsMapping {
 }
 
 impl IsMapping for Mapping {
-    fn store<T>(self, key: b256, value:T) {
+    fn store(self, key: b256, value:u64) {
         let storage_slot = hash_pair(self.name, key, HashMethod::Sha256);
         
         store(storage_slot, value);
 
     }
 
-    fn retrieve<T>(self, key: b256) -> T {
+    fn retrieve(self, key: b256) -> u64 {
         let storage_slot = hash_pair(self.name, key, HashMethod::Sha256);
 
-        let resultingValue:T = get::<T>(storage_slot);
+        let resultingValue:u64 = get::<u64>(storage_slot);
 
         resultingValue
     }
