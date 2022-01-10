@@ -4,7 +4,7 @@ use std::chain::*;
 use std::hash::*;
 use std::storage::*;
 
-struct Mapping {
+pub struct Mapping {
     name:b256
 }
 
