@@ -37,3 +37,62 @@ fn toElastic(total:Rebase, base:u64, roundUp:bool) -> u64 {
 
     elastic
 }
+
+pub struct RebaseReturn {
+    totalRebase:Rebase,
+    baseValue:u64,
+}
+
+fn addWRound(total: Rebase, elastic:u64, roundUp:bool) -> RebaseReturn {
+    let base = toBase(total, elastic, roundUp);
+    total.elastic = total.elastic + elastic;
+    total.base = total.base + base;
+    let returnValue: RebaseReturn = RebaseReturn{
+        totalRebase:total,
+        baseValue:base,
+    };
+
+    returnValue
+}
+
+
+fn subWRound(total: Rebase, elastic:u64, roundUp:bool) -> RebaseReturn {
+    let base = toBase(total, elastic, roundUp);
+    total.elastic = total.elastic - elastic;
+    total.base = total.base - base;
+    let returnValue: RebaseReturn = RebaseReturn{
+        totalRebase:total,
+        baseValue:base,
+    };
+
+    returnValue
+}
+ 
+fn add(total:Rebase, elastic:u64, base:u64) -> Rebase {
+    total.elastic = total.elastic + elastic;
+    total.base = total.base + base;
+
+    total
+}
+
+fn sub(total:Rebase, elastic:u64, base:u64) -> Rebase {
+    total.elastic = total.elastic - elastic;
+    total.base = total.base - base;
+
+    total
+}
+
+/* ---------------- Important to note that these methods are different than Boring Solidity ----------- */
+// Storage is iffy so this just returns a new rebase every time, Functional Programming remains supreme
+
+fn addElastic(total:Rebase, elastic:u64) -> Rebase {
+    total.elastic = total.elastic + elastic;
+
+    total
+}
+
+fn subElastic(total:Rebase, elastic:u64) -> Rebase {
+    total.elastic = total.elastic - elastic;
+
+    total
+}
